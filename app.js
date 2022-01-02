@@ -6,21 +6,20 @@ const ejs = require('ejs')
 const port = process.env.PORT || 3000
 
 const app = express()
-const router = express.Router();
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + "/public"))
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
-router.get('/about', (req, res) => {
+app.get('/about', (req, res) => {
     res.render('about')
 })
 
-router.get('/weather', (req, res, next) => {
+app.get('/weather', (req, res, next) => {
 
     if(!req.query.city) {
         return res.send({error: "No city name is provided."})
@@ -45,9 +44,6 @@ router.get('/weather', (req, res, next) => {
         }
     })
 })
-
-
-app.use(router)
 
 app.listen(port, (req, res) => {
     console.log("The server is running on port " + port + "...")
