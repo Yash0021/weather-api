@@ -1,0 +1,31 @@
+
+<%- include('./partials/header') %>
+
+    <div class="container">
+        <h1 class="heading">Weather</h1>
+
+        <div class="links">
+            <a href="/">Weather</a>
+            <a href="/about">About</a>
+            <a href="#">Help</a>
+        </div>
+
+        <form class="form">
+            <input type="text" class="city-input" placeholder="Enter city name" name="cityname" required>
+            <button class="submit-button" type="submit">Get Weather</button>
+        </form>
+
+        <h1 id="cityname"></h1>
+        <p id="city"></p>
+        <p id="temperature"></p>
+        <p id="description"></p>
+
+        <p>Use this website to get the weather information!</p>
+    </div>
+
+    <div style="width: 80%; margin: 0 auto;">
+        <p style="font-size: 1rem;">Created by Yash Patel.</p>
+    </div>
+
+<%- include('./partials/footer') %>
+    
