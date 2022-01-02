@@ -3,13 +3,12 @@ const formData = document.querySelector('form')
 
 formData.addEventListener('submit', (event) => {
     const city = document.querySelector('input').value
-    document.querySelector('input').value = ''
 
     document.getElementById('city').textContent = "Loading..."
     document.getElementById('temperature').textContent = ''
     document.getElementById('description').textContent = ''
 
-    fetch('https://patel-yash-weather.herokuapp.com/weather?city=' + city).then(response => {
+    fetch('/weather?city=' + city).then(response => {
 
         response.json().then((data) => {
             if(data.cod == 400 || data.cod == 404){
