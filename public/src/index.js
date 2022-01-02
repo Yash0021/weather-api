@@ -9,7 +9,7 @@ formData.addEventListener('submit', (event) => {
     document.getElementById('temperature').textContent = ''
     document.getElementById('description').textContent = ''
 
-    fetch('/weather?city=' + city).then(response => {
+    fetch('https://patel-yash-weather.herokuapp.com/weather?city=' + city).then(response => {
 
         response.json().then((data) => {
             if(data.cod == 400 || data.cod == 404){
