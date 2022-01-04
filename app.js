@@ -4,9 +4,6 @@ const bodyParser = require('body-parser')
 const {geocode, forecast} = require('./src/geocode')
 const ejs = require('ejs')
 const port = process.env.PORT
-const https = require('https')
-const { response } = require('express')
-const API = process.env.API_KEY
 
 const app = express()
 
@@ -28,41 +25,23 @@ app.get('/weather', (req, res, next) => {
         return res.send({error: "No city name is provided."})
     }
 
-    // geocode(req.query.city, (err, data) => {
-    //     if(err) {
-    //         res.send({
-    //             error: 404,
-    //             message: "Unbale to find city."
-    //         })
-    //     } else {
-    //         forecast(data, (err, data) => {
-    //             if(err){
-    //                 res.send({
-    //                     error: "There is no location with such coordinates."
-    //                 })
-    //             } else {
-    //                 res.send(data)
-    //             }
-    //         })
-    //     }
-    // })
-    const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + req.query.city + '&appid=' + API
-
-    https.get(url, (response) => {
-        response.on('data', (data) => {
-            const weatherData = JSON.parse(data.toString())
-
-            if(weatherData.cod != 200) {
-                res.send({error: "There is not such location."})
-            } else {
-                res.send({
-                    error: undefined,
-                    city: weatherData.name,
-                    temperature: weatherData.main.temp,
-                    description: weatherData.weather[0].description
-                })
-            }
-        })
+    geocode(req.query.city, (err, data) => {
+        if(err && data == undefined) {
+            res.send({
+                error: 404,
+                message: "Unbale to find city."
+            })
+        } else {
+            forecast(data, (err, data) => {
+                if(err){
+                    res.send({
+                        error: "There is no location with such coordinates."
+                    })
+                } else {
+                    res.send(data)
+                }
+            })
+        }
     })
 })
 
