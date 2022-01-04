@@ -1,26 +1,42 @@
 const https = require('https')
 const API = process.env.API_KEY
 
-const geocode = (address, callback) => {
+// const geocode = (address, callback) => {
+//     const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + address + '&appid=' + API
+
+//     https.get(url, (response) => {
+//         response.on('data', (data) => {
+//             const cityData = JSON.parse(data.toString())
+
+//             if(cityData.cod == 404) {
+//                 callback(cityData, undefined)
+//             } else {
+//                 const {lon, lat} = cityData.coord
+//                 const coord = {
+//                     lon: lon,
+//                     lat: lat
+//                 }
+//                 callback(undefined, coord)
+//             }
+//         })
+//     }).on('error', (err) => {
+//         callback(err, undefined)
+//     })
+// }
+
+const geocode = (address) => {
     const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + address + '&appid=' + API
 
     https.get(url, (response) => {
         response.on('data', (data) => {
-            const cityData = JSON.parse(data.toString())
+            const weatherData = JSON.parse(data.toString())
 
-            if(cityData.cod == 404) {
-                callback(cityData, undefined)
+            if(weatherData.cod == 404){
+                return undefined
             } else {
-                const {lon, lat} = cityData.coord
-                const coord = {
-                    lon: lon,
-                    lat: lat
-                }
-                callback(undefined, coord)
+                
             }
         })
-    }).on('error', (err) => {
-        callback(err, undefined)
     })
 }
 
