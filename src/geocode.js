@@ -8,7 +8,7 @@ const geocode = (address, callback) => {
         response.on('data', (data) => {
             const cityData = JSON.parse(data.toString())
 
-            if(cityData.cod && cityData.message) {
+            if(Number(cityData.cod) == 404) {
                 callback({error: "Error finding location."}, undefined)
                 return
             } else {
