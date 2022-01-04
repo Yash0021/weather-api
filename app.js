@@ -52,10 +52,11 @@ app.get('/weather', (req, res, next) => {
         response.on('data', (data) => {
             const weatherData = JSON.parse(data.toString())
 
-            if(weatherData.cod != 200) {
+            if(weatherData.cod == 404) {
                 res.send({error: "There is not such location."})
             } else {
                 res.send({
+                    error: undefined,
                     city: weatherData.name,
                     temperature: weatherData.main.temp,
                     description: weatherData.weather[0].description
