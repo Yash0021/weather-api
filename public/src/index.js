@@ -2,7 +2,7 @@ const formData = document.querySelector('form')
 
 
 formData.addEventListener('submit', (event) => {
-    const city = document.querySelector('input').value
+    const city = document.getElementById('city-name').value
 
     document.getElementById('city').textContent = "Loading..."
     document.getElementById('temperature').textContent = ''
