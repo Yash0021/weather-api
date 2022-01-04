@@ -3,7 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const {geocode, forecast} = require('./src/geocode')
 const ejs = require('ejs')
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 const app = express()
 
@@ -45,6 +45,6 @@ app.get('/weather', (req, res, next) => {
     })
 })
 
-app.listen(port, (req, res) => {
+app.listen(port || 3000, (req, res) => {
     console.log("The server is running on port " + port + "...")
 })
