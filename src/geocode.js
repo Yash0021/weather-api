@@ -9,13 +9,15 @@ const geocode = (address, callback) => {
     https.get(url, (response) => {
         response.on('data', (data) => {
             const cityData = JSON.parse(data.toString())
+            console.log(cityData)
 
             if(cityData.cod == 404) {
                 callback(cityData, undefined)
             } else {
+                const {lon, lat} = cityData.coord
                 const coord = {
-                    lon: cityData.coord.lon,
-                    lat: cityData.coord.lat
+                    lon: lon,
+                    lat: lat
                 }
                 callback(undefined, coord)
             }
