@@ -1,5 +1,3 @@
-const { response } = require('express')
-const res = require('express/lib/response')
 const https = require('https')
 const API = process.env.API_KEY
 
@@ -9,15 +7,15 @@ const geocode = (address, callback) => {
     https.get(url, (response) => {
         response.on('data', (data) => {
             const cityData = JSON.parse(data.toString())
-            console.log(cityData)
+            // console.log(cityData)
 
             if(cityData.cod == 404) {
                 callback(cityData, undefined)
             } else {
-                const {lon, lat} = cityData.coord
+                // const {lon, lat} = cityData.coord
                 const coord = {
-                    lon: lon,
-                    lat: lat
+                    lon: 77.1025,
+                    lat: 28.7041
                 }
                 callback(undefined, coord)
             }

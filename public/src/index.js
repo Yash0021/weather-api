@@ -20,8 +20,6 @@ formData.addEventListener('submit', (event) => {
                     document.getElementById('city').textContent = "Cityname: " + data.city
                     document.getElementById('temperature').textContent = "Temperature: " + data.temperature
                     document.getElementById('description').textContent = "Weather Desciption: " + data.description 
-
-
                 }
             }
         })
