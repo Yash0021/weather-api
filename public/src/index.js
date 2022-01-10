@@ -12,7 +12,7 @@ formData.addEventListener('submit', (event) => {
 
         response.json().then((data) => {
             if(data.cod == 400 || data.cod == 404){
-                console.log("Please provide valid location.")
+                throw new Error("Provide valid location.")
             } else {
                 if (data.error){
                     document.getElementById("city").textContent = "PLease provide valid location to find weather information."
@@ -22,6 +22,8 @@ formData.addEventListener('submit', (event) => {
                     document.getElementById('description').textContent = "Weather Desciption: " + data.description 
                 }
             }
+        }).catch(err => {
+            document.getElementById('city').textContent = "Error finding city"
         })
     })
     event.preventDefault()

@@ -28,12 +28,13 @@ const geocode = (address, callback) => {
 const forecast = (forecastData, callback) => {
     const {lon, lat} = forecastData
 
-    const url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + "&lon=" + lon + '&appid=' + API
+    const url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + API
     https.get(url, (response) => {
         response.on('data', (data) => {
             const cityData = JSON.parse(data.toString())
 
             callback(undefined, {
+                error: undefined,
                 city: cityData.name,
                 temperature: cityData.main.temp,
                 description: cityData.weather[0].description
